@@ -3,8 +3,16 @@
   gap: 2px;
   align-items: center;
   justify-content: space-between;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
-button {
+
+.pagination-page-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.page-btn {
   outline: none;
   background: none;
   border: 2px solid #e7e5e5;
@@ -12,6 +20,43 @@ button {
   cursor: pointer;
   height: 30px;
   width: 30px;
+  padding: 0;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+  color: darkgray;
+}
+
+.page-btn:not(:disabled):not(.current):hover,
+select:hover {
+  background-color: #e7e5e5;
+}
+
+.page-btn:not(:disabled):not(.current):active {
+  background-color: #999999;
+  border: none;
+  color: white;
+}
+
+.page-btn.current {
+  background-color: #363636;
+  color: white;
+  border-color: #363636;
+}
+
+select {
+  outline: none;
+  background: none;
+  border: 2px solid #e7e5e5;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  width: 50px;
+}
+
+select:active {
+  border: 2px solid #545454;
 }
 
 .arrow-icon {
@@ -23,59 +68,10 @@ button {
   pointer-events: none;
 }
 
-/* .dots {
-  display: inline-block;
-}
-
-.dots::after {
-  content: "...";
-  line-height: 0;
-} */
-
 .arrow-icon.right {
   transform: translateX(-2px) rotate(-45deg);
 }
 
 .arrow-icon.left {
   transform: translateX(2px) rotate(135deg);
-}
-
-button:disabled {
-  cursor: not-allowed;
-  color: darkgray;
-}
-
-.page-btn {
-  width: 30px;
-  /* height: 30px; */
-  padding: 0;
-}
-
-button:not(:disabled):hover,
-select:hover {
-  background-color: #e7e5e5;
-  /* border: none; */
-}
-
-button:not(:disabled):active {
-  background-color: #999999;
-  border: none;
-  color: white;
-}
-
-select:active {
-  border: 2px solid #545454;
-}
-
-.page-btn.current {
-}
-
-select {
-  outline: none;
-  background: none;
-  border: 2px solid #e7e5e5;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 30px;
-  width: 50px;
 }

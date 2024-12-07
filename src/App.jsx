@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Pagination from "./components/Pagination/Pagination";
 import ProjectsTable from "./components/ProjectsTable/ProjectsTable";
+import Loader from "./components/Loader/Loader";
 import useFetchData from "./hooks/useFetchData";
 import "./App.css";
 
@@ -21,18 +22,17 @@ export default function App() {
   );
 
   if (error) {
-    return <h1>Something went wrong! Please try again.</h1>;
+    return <h2>Something went wrong! Please try again.</h2>;
   }
 
-  if (isLoading) {
-    return <h1>LOADING....</h1>;
-  }
   return (
-    <div className="App">
-      {data && (
-        <div className="container">
-          <ProjectsTable projects={currentData} />
-          <div className="bottom-container">
+    <div className="app">
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data && (
+          <div className="container">
+            <ProjectsTable projects={currentData} />
             <Pagination
               totalItems={data.length}
               itemsPerPage={itemsPerPage}
@@ -40,10 +40,10 @@ export default function App() {
               onPageChange={setCurrentPage}
               setItemsPerPage={setItemsPerPage}
               setCurrentPage={setCurrentPage}
-              visibleRange={2}
+              visibleRange={1}
             />
           </div>
-        </div>
+        )
       )}
     </div>
   );

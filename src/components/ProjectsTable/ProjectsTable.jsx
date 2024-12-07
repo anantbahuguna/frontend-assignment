@@ -1,7 +1,6 @@
 import "./projectsTable.css";
 
 export default function ProjectsTable({ projects }) {
-  console.log("projects ", projects);
   return (
     <div className="table-wrapper">
       <table>

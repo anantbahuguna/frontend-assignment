@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import "./pagination.css";
 
 export default function Pagination({
@@ -10,27 +11,63 @@ export default function Pagination({
   visibleRange,
 }) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startingVisiblePage = currentPage - visibleRange;
-  const endingVisibleRange = currentPage + visibleRange;
-  const noOfVisiblePages = endingVisibleRange - startingVisiblePage + 1;
+
+  const pages = useMemo(() => {
+    const pageList = [];
+    const start = Math.max(2, currentPage + 1 - visibleRange);
+    const end = Math.min(totalPages - 1, currentPage + 1 + visibleRange);
+
+    //Always start with first page
+    pageList.push(1);
+
+    if (start > 2) {
+      pageList.push("...");
+    }
+
+    for (let i = start; i <= end; i++) {
+      pageList.push(i);
+    }
+
+    if (end < totalPages - 1) {
+      pageList.push("...");
+    }
+
+    if (totalPages > 1) {
+      pageList.push(totalPages);
+    }
+
+    return pageList;
+  }, [currentPage, visibleRange, totalItems, itemsPerPage]);
   return (
     <div className="pagination-container">
-      <div className="pagination-control">
+      <div className="pagination-page-control">
         <button
+          className="page-btn"
           onClick={() => onPageChange(currentPage - 1)}
           aria-label="Previous"
           disabled={currentPage === 0}
         >
           <span className="arrow-icon left" aria-hidden={true} />
         </button>
-        <button className="page-btn">{1}</button>
-        <button className="page-btn">{startingVisiblePage + 1}</button>
-        <button className="page-btn">{currentPage + 1}</button>
-        <button className="page-btn">{endingVisibleRange + 1}</button>
-        {"..."}
-        {/* <span className="dots" aria-hidden={true} /> */}
-        <button className="page-btn">{totalPages}</button>
+        {pages.map((page, index) => {
+          return page === "..." ? (
+            <span key={`dots-${index}`} className="dots" aria-hidden={true}>
+              ...
+            </span>
+          ) : (
+            <button
+              className={`page-btn ${
+                currentPage === page - 1 ? "current" : ""
+              }`}
+              key={`page-btn-${index}`}
+              onClick={() => onPageChange(page - 1)}
+            >
+              {page}
+            </button>
+          );
+        })}
         <button
+          className="page-btn"
           onClick={() => onPageChange(currentPage + 1)}
           aria-label="Next"
           disabled={totalItems <= (currentPage + 1) * itemsPerPage}
@@ -38,7 +75,7 @@ export default function Pagination({
           <span className="arrow-icon right" aria-hidden={true} />
         </button>
       </div>
-      <div className="pagination-control">
+      <div className="pagination-row-control">
         Rows:{" "}
         <span>
           <select
