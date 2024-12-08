@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Pagination from "./components/Pagination/Pagination";
 import ProjectsTable from "./components/ProjectsTable/ProjectsTable";
 import Loader from "./components/Loader/Loader";
@@ -22,7 +22,7 @@ export default function App() {
   );
 
   if (error) {
-    return <h2>Something went wrong! Please try again.</h2>;
+    return <h2>{`Something went wrong! Please try again. Error: ${error}`}</h2>;
   }
 
   return (

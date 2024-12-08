@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import "./pagination.css";
 
 export default function Pagination({
@@ -38,6 +38,11 @@ export default function Pagination({
 
     return pageList;
   }, [currentPage, visibleRange, totalItems, itemsPerPage]);
+
+  if (!totalItems) {
+    return null;
+  }
+
   return (
     <div className="pagination-container">
       <div className="pagination-page-control">
@@ -76,8 +81,8 @@ export default function Pagination({
         </button>
       </div>
       <div className="pagination-row-control">
-        Rows:{" "}
-        <span>
+        <label>
+          Rows:{" "}
           <select
             name="itemsPerPage"
             value={itemsPerPage}
@@ -85,13 +90,14 @@ export default function Pagination({
               setItemsPerPage(e.target.value);
               setCurrentPage(0);
             }}
+            aria-label="Rows per page"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={15}>15</option>
             <option value={totalItems}>All</option>
           </select>
-        </span>
+        </label>
       </div>
     </div>
   );
