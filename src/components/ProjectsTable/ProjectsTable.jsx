@@ -1,6 +1,10 @@
+import React from "react";
 import "./projectsTable.css";
 
 export default function ProjectsTable({ projects }) {
+  if (!projects || !projects.length) {
+    return <h2>No data available !</h2>;
+  }
   return (
     <div className="table-wrapper">
       <table>

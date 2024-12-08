@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component matches snapshot for loading state 1`] = `
+<DocumentFragment>
+  <div
+    class="app"
+  >
+    <div
+      aria-label="Loading"
+      class="loader"
+      data-test-id="loader"
+    />
+  </div>
+</DocumentFragment>
+`;
