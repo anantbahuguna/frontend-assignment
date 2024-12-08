@@ -23,9 +23,9 @@
   padding: 0;
 }
 
-.page-btn:not(.current):focus,
-select:focus {
-  border-color: #363636;
+.page-btn:not(.current):focus-visible,
+select:focus-visible {
+  outline: #363636 solid 1px;
 }
 
 .page-btn:disabled {
