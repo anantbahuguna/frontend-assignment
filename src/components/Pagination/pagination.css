@@ -23,6 +23,11 @@
   padding: 0;
 }
 
+.page-btn:not(.current):focus,
+select:focus {
+  border-color: #363636;
+}
+
 .page-btn:disabled {
   cursor: not-allowed;
   color: darkgray;
